@@ -41,7 +41,7 @@ if city in st.session_state.favorites:
         st.rerun()
 
 # Other sidebar options
-show_5day = st.sidebar.checkbox("Show 5-Day Forecast", True)
+show_5day = st.sidebar.checkbox("Show 3-Day Forecast", True)
 show_hourly = st.sidebar.checkbox("Show Hourly Forecast (24h)", False)
 show_alerts = st.sidebar.checkbox("Show Weather Alerts", False)
 
@@ -58,7 +58,7 @@ hist_date = st.sidebar.date_input(
 theme = st.sidebar.radio("Choose Theme", ["Light", "Dark"])
 
 # Background styling
-bg_color = "#ebff0ea4" if theme == "Light" else "#1e1e2f"
+bg_color = "#efff43e1" if theme == "Light" else "#1e1e2f"
 text_color = "black" if theme == "Light" else "white"
 st.markdown(f"""
     <style>
@@ -134,7 +134,7 @@ def plot_temperature_graph(forecast_data):
                              line=dict(color=min_line_color)))
 
     fig.update_layout(
-        title=dict(text='5-Day Temperature Forecast', font=dict(color=font_color, size=20)),
+        title=dict(text='3-Day Temperature Forecast', font=dict(color=font_color, size=20)),
         xaxis=dict(title='Date', color=font_color, gridcolor=grid_color),
         yaxis=dict(title='Temperature (°C)', color=font_color, gridcolor=grid_color),
         plot_bgcolor=bg_color,
@@ -148,7 +148,7 @@ def plot_temperature_graph(forecast_data):
 # Main app logic
 if city:
     current = get_current_weather(city)
-    forecast_data = get_forecast(city, days=5)
+    forecast_data = get_forecast(city, days=3)
     historical = get_historical_weather(city, hist_date)
 
     if current and forecast_data:
@@ -183,7 +183,7 @@ if city:
             st.markdown("---")
 
         if show_5day:
-            st.subheader("5-Day Forecast")
+            st.subheader("3-Day Forecast")
             for day in forecast_data['forecast']['forecastday']:
                 st.markdown(f"### {day['date']}")
                 cols = st.columns(3)
