@@ -3,8 +3,12 @@ import requests
 from datetime import  date, timedelta
 from pathlib import Path
 import plotly.graph_objects as go
+import os
+from dotenv import load_dotenv
 
-API_KEY = "1a18b6c5c60840b9af470731250806"
+load_dotenv()
+
+API_KEY = os.getenv("WEATHER_API_KEY")
 BASE_URL = "http://api.weatherapi.com/v1"
 
 # Initialize favorites in session state
